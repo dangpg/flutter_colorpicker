@@ -9,16 +9,12 @@ const List<Color> _colorTypes = [
   Colors.pink,
   Colors.purple,
   Colors.deepPurple,
-  Colors.indigo,
   Colors.blue,
-  Colors.lightBlue,
   Colors.cyan,
   Colors.teal,
   Colors.green,
   Colors.lightGreen,
-  Colors.lime,
   Colors.yellow,
-  Colors.amber,
   Colors.orange,
   Colors.deepOrange,
   Colors.brown,
@@ -98,14 +94,9 @@ class _GridPickerState extends State<GridPicker> {
                 (Color _color) {
                   return GestureDetector(
                     onTap: () {
-                      setState(() {
-                        _currentColor = _color;
-                        widget.onColorChanged(_currentColor);
-                        _hexController.text = _currentColor.value
-                            .toRadixString(16)
-                            .replaceFirst('FF', '')
-                            .toUpperCase();
-                      });
+                      _currentColor = _color;
+                      widget.onColorChanged(_currentColor);
+                      Navigator.pop(context);
                     },
                     child: Container(
                       color: Color(0),
@@ -115,7 +106,7 @@ class _GridPickerState extends State<GridPicker> {
                           height: 45.0,
                           decoration: BoxDecoration(
                             color: _color,
-                            borderRadius: BorderRadius.circular(5.0),
+                            shape: BoxShape.circle,
                             boxShadow: (_currentColor == _color)
                                 ? [
                                     (_color == Theme.of(context).cardColor)
